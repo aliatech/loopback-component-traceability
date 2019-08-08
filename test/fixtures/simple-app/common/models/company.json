@@ -1,0 +1,29 @@
+{
+  "name": "Company",
+  "base": "PersistedModel",
+  "description": "Model for testing purpose",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Traceable": {
+      "displayProperty": "name",
+      "events": {
+        "create": true,
+        "update": true,
+        "remove": true
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "description": "Company name",
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "methods": {}
+}

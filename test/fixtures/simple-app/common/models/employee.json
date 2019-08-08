@@ -1,0 +1,38 @@
+{
+  "name": "Employee",
+  "base": "PersistedModel",
+  "description": "Model for testing purpose",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Traceable": {
+      "displayProperty": "name",
+      "events": {
+        "create": true,
+        "update": true,
+        "remove": false
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "description": "Employee name",
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "description": "Company name which the employee works in",
+      "type": "string"
+    },
+    "position": {
+      "description": "Employee position in the company",
+      "type": "string",
+      "default": "junior"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "methods": {}
+}

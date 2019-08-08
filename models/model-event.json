@@ -1,0 +1,60 @@
+{
+  "name": "ModelEvent",
+  "description": "Represents an action which the model is involved in",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "description": "Identifies the event type",
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "description": "Information about the event to be displayed to the user",
+      "type": "string"
+    },
+    "objectName": {
+      "description": "Name of the involved object. Store it to avoid loading the object relation to display the object to the user",
+      "type": "string"
+    },
+    "details": {
+      "description": "Dictionary of arbitrary data to extend the information about the event",
+      "type": "object"
+    }
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "object": {
+      "description": "Object which the event involves",
+      "type": "belongsTo",
+      "polymorphic": {
+        "foreignKey": "objectId",
+        "discriminator": "objectType"
+      }
+    }
+  },
+  "methods": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "../../../../": {
+    "userModel": "User",
+    "events": {
+      "remove": false,
+      "hired": {
+        "message": "%(objectName)s has been hired by %(details.companyName)s",
+        "details": {
+          "companyName": {
+            "default": "an undefined company"
+          }
+        }
+      }
+    }
+  }
+}
