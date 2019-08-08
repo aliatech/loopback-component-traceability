@@ -43,7 +43,10 @@ describe('Employee events', () => {
   });
 
   it('Create employee should register create event', async () => {
-    const employee = await Employee.create({name: 'John Doe'});
+    const employee = await Employee.create({
+      name: 'John Doe',
+      address: {city: 'London'},
+    });
     ctx.employee = employee;
     const events = await employee.traceEvents.find();
     should.exist(events);
@@ -107,6 +110,8 @@ describe('Employee events', () => {
     should.exist(event);
     event.should.have.property('message')
       .and.be.equal('John Doe has been hired by ALIA Technologies');
+    event.should.have.propertyByPath('details', 'city')
+      .and.be.equal('London');
   });
 
   it('Should retrieve all events for the employee', async () => {

@@ -11,6 +11,9 @@
           },
           "position": {
             "mapFrom": "position"
+          },
+          "city": {
+            "mapFrom": "address.city"
           }
         }
       }
