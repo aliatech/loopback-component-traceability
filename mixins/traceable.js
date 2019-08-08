@@ -23,6 +23,11 @@ module.exports = (Traceable, options = {}) => {
   //  SETUP
   //============================================================================================================
 
+  // Attempt to retrieve options from a model method
+  if (options.config && _.isString(options.config) && _.isFunction(Traceable[options.config])) {
+    options = Traceable[options.config]();
+  }
+
   /**
    * Mixin options extended with defaults.
    * @var {Object}

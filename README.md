@@ -53,6 +53,20 @@ Configure models in *model-config.json*:
 ...
 ```
 
+> Example: Change collection name in MongoDB
+
+```
+"ModelEvent": {
+  "dataSource": "db",
+  "public": true,
+  "options": {
+    "mongodb": {
+      "collection": "Event"
+    }
+  }
+},
+```
+
 ### Notes
 
 Enable ACL in your Loopback project if you haven't yet.

@@ -30,7 +30,12 @@
   },
   "ModelEvent": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "mongodb": {
+        "collection": "Event"
+      }
+    }
   },
   "Employee": {
     "dataSource": "db",
