@@ -165,7 +165,7 @@ module.exports = (Traceable, options = {}) => {
         return !_.isEmpty(detail.mapFrom);
       })
       .mapValues((detail) => {
-        return this[detail.mapFrom];
+        return _.get(this, detail.mapFrom);
       })
       .value();
   };
