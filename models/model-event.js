@@ -72,12 +72,20 @@ module.exports = function (ModelEvent) {
    */
   ModelEvent.getInstance = function (data = {}) {
     const inst = new ModelEvent();
-    if (data.object) inst.setObject(data.object);
     inst.setType(data.type);
     inst.resetDetails();
-    if (data.message) inst.setMessageTemplate(data.message);
-    if (data.author) inst.setAuthor(data.author);
-    if (data.details) inst.extendDetails(data.details);
+    if (data.object) {
+      inst.setObject(data.object);
+    }
+    if (data.message) {
+      inst.setMessageTemplate(data.message);
+    }
+    if (data.author) {
+      inst.setAuthor(data.author);
+    }
+    if (data.details) {
+      inst.extendDetails(data.details);
+    }
     return inst;
   };
 
@@ -91,7 +99,12 @@ module.exports = function (ModelEvent) {
    */
   ModelEvent.prototype.setObject = function (object) {
     this.object(object);
-    this.objectName = object[object.constructor.__traceableOptions.displayProperty];
+    const mixinOpts = object.getTraceableOptions();
+    this.objectName = object[mixinOpts.displayProperty];
+    if (this.typeSpec) {
+      const modelDetails = object.getTraceableModelDetails(this.typeSpec);
+      this.extendDetails(modelDetails);
+    }
   };
 
   /**

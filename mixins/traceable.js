@@ -145,4 +145,28 @@ module.exports = (Traceable, options = {}) => {
   Traceable.prototype.traceEvent = async function (...args) {
     return Traceable.traceEvent(...args, this);
   };
+
+  /**
+   * Get the mixin options for this model
+   * @return {Object}
+   */
+  Traceable.prototype.getTraceableOptions = function () {
+    return mixinOptions;
+  };
+
+  /**
+   * Get traceable event details that are directly mapped from the model instance
+   * @param {EventType} typeSpec
+   * @return {object}
+   */
+  Traceable.prototype.getTraceableModelDetails = function (typeSpec) {
+    return _(typeSpec.details)
+      .pickBy((detail) => {
+        return !_.isEmpty(detail.mapFrom);
+      })
+      .mapValues((detail) => {
+        return this[detail.mapFrom];
+      })
+      .value();
+  };
 };

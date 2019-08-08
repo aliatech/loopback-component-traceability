@@ -8,6 +8,9 @@
         "details": {
           "companyName": {
             "default": "an undefined company"
+          },
+          "position": {
+            "mapFrom": "position"
           }
         }
       }
