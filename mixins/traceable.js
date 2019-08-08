@@ -75,18 +75,17 @@ module.exports = (Traceable, options = {}) => {
   Traceable.observe('after save', async (ctx) => {
     const inst = ctx.instance || ctx.currentInstance;
     if (!inst) return;
-    if (ctx.isNewInstance) {
-      return inst.traceEvent('create');
-    } else {
-      return inst.traceEvent('update');
-    }
+    const userId = _.get(ctx, 'options.accessToken.userId');
+    const eventType = ctx.isNewInstance ? 'create' : 'update';
+    return inst.traceEvent(eventType, userId);
   });
 
   // Register remove event after delete
   Traceable.observe('after delete', async (ctx) => {
     const inst = ctx.instance || ctx.currentInstance;
     if (!inst) return;
-    return inst.traceEvent('remove');
+    const userId = _.get(ctx, 'options.accessToken.userId');
+    return inst.traceEvent('remove', userId);
   });
 
   //============================================================================================================

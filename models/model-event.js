@@ -141,10 +141,14 @@ module.exports = function (ModelEvent) {
 
   /**
    * Set author.
-   * @param {User} author
+   * @param {User|string} author User instance or user id
    */
   ModelEvent.prototype.setAuthor = function (author) {
-    this.author(author);
+    if (_.isString(author)) {
+      this.authorId = author;
+    } else {
+      this.author(author);
+    }
   };
 
   /**
