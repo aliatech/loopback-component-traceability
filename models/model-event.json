@@ -25,6 +25,17 @@
       "type": "object"
     }
   },
+  "indexes": {
+    "event_object": {
+      "keys": {
+        "objectType": 1,
+        "objectId": 1
+      }
+    },
+    "event_type": {
+      "age": -1
+    }
+  },
   "mixins": {
     "TimeStamp": {
       "required": false,
