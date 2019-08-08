@@ -4,16 +4,8 @@ Module for Loopback Framework that allows to keep a persisted traceability of cu
 
 ## Installation
 
-Add package to *"dependences"* in *package.json*
-
 ```
-"loopback-component-traceability": "file:node_modules_local/loopback-component-traceability",
-```
-
-Install dependences from project root directory
-
-```
-npm i
+npm i -S github:aliatech/loopback-component-traceability.git#develop
 ```
 
 Enable and configure component in *component-config.json*
@@ -29,7 +21,7 @@ Enable model files in *model-config.json*:
 ```
 "models": [
   ...,
-  "../node_modules/loopback-component-traceability/models"
+  "../node_modules/@aliatech7loopback-component-traceability/models"
 ]
 ```
 
@@ -38,7 +30,7 @@ Enable mixin files in *model-config.json*:
 ```
 "mixins": [
   ...,
-  "../node_modules/loopback-component-traceability/mixins"
+  "../node_modules/@aliatech/loopback-component-traceability/mixins"
 ]
 ```
 
@@ -87,7 +79,7 @@ module.exports = function enableAuthentication(server) {
 Install development dependences from module root directory only if you want to execute module tests
 
 ```
-cd node_modules_local/loopback-component-traceability
+cd node_modules/@aliatech/loopback-component-traceability
 npm i --only=dev
 ```
 

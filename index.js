@@ -38,6 +38,5 @@ const Component = module.exports = function (app, componentOptions = {}) {
   // Configure model event dynamic relations once it's attached to app
   app.models.ModelEvent.setupRelations(options);
 
-  debug('initialized with component options:');
-  debug(options);
+  debug('initialized');
 };
