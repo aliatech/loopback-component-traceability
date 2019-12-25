@@ -1,6 +1,6 @@
 {
   "name": "@aliatech/loopback-component-traceability",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Loopback component that provides functionality to keep a traceability of custom operations over models",
   "publishConfig": {
     "access": "public"
