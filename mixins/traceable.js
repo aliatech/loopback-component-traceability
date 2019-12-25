@@ -9,7 +9,7 @@
  */
 
 const _ = require('lodash');
-const debug = require('../lib/debug').create();
+// const debug = require('../lib/debug').create();
 const GeneralEventType = require('../lib/event-type');
 
 /**
@@ -22,24 +22,7 @@ module.exports = (Traceable, options = {}) => {
   //============================================================================================================
   //  SETUP
   //============================================================================================================
-
-  // Attempt to retrieve options from a model method
-  if (options.config && _.isString(options.config) && _.isFunction(Traceable[options.config])) {
-    options = Traceable[options.config]();
-  }
-
-  /**
-   * Mixin options extended with defaults.
-   * @var {Object}
-   */
-  const mixinOptions = Traceable.__traceableOptions = _.merge({
-    displayProperty: 'name',
-    events: {
-      create: true,
-      update: true,
-      remove: true,
-    },
-  }, options);
+  let mixinOptions;
 
   /**
    * Pool of custom events for this model.
@@ -49,6 +32,24 @@ module.exports = (Traceable, options = {}) => {
 
   // Configure mixin properties and relations once the model is attached to app
   Traceable.on('attached', () => {
+    // Attempt to retrieve options from a model method
+    if (options.config && _.isString(options.config) && _.isFunction(Traceable[options.config])) {
+      options = Traceable[options.config]();
+    }
+
+    /**
+     * Mixin options extended with defaults.
+     * @var {Object}
+     */
+    mixinOptions = Traceable.__traceableOptions = _.merge({
+      displayProperty: 'name',
+      events: {
+        create: true,
+        update: true,
+        remove: true,
+      },
+    }, options);
+
     // Define specific custom event types for this model
     _.each(mixinOptions.events, (eventOptions, eventType) => {
       return Traceable.addEventType(eventType, eventOptions);
