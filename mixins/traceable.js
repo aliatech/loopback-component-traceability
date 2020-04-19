@@ -161,13 +161,19 @@ module.exports = (Traceable, options = {}) => {
    * @return {object}
    */
   Traceable.prototype.getTraceableModelDetails = function (typeSpec) {
-    return _(typeSpec.details)
-      .pickBy((detail) => {
-        return !_.isEmpty(detail.mapFrom);
-      })
-      .mapValues((detail) => {
-        return _.get(this, detail.mapFrom);
-      })
-      .value();
+    let details = null;
+    if (_.isFunction(typeSpec.details)) {
+      details = typeSpec.details(this);
+    } else {
+      details = _(typeSpec.details)
+        .pickBy((detail) => {
+          return !_.isEmpty(detail.mapFrom);
+        })
+        .mapValues((detail) => {
+          return _.get(this, detail.mapFrom);
+        })
+        .value();
+    }
+    return details;
   };
 };

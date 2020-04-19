@@ -6,7 +6,7 @@ const EventType = require('../lib/event-type');
 
 describe('Employee events', () => {
 
-  let Employee, Company, ctx;
+  let Employee, Company, City, ctx;
 
   //=====================================================================================
   // Init fixture
@@ -18,6 +18,7 @@ describe('Employee events', () => {
       require('../')(app);
       Employee = app.models.Employee;
       Company = app.models.Company;
+      City = app.models.City;
       ctx = _ctx;
       done();
     });
@@ -84,6 +85,19 @@ describe('Employee events', () => {
     });
     should.exist(event);
     event.should.have.property('message').and.be.equal('John Doe as arrived 15 minutes late');
+  });
+
+  it('Should register event computing details as a function', async () => {
+    const cityName = 'Barcelona';
+    const population = 2873000;
+    ctx.city = await City.create({
+      name: cityName,
+      population,
+    });
+    const event = await ctx.city.traceEvent(City.Event.PopulationChange);
+    should.exist(event);
+    event.should.have.property('message')
+      .and.be.equal(`${cityName} population is now ${population}`);
   });
 
   it('Should register preset event (passing EventType)', async () => {

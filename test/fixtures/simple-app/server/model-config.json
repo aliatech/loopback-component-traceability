@@ -44,5 +44,9 @@
   "Company": {
     "dataSource": "db",
     "public": true
+  },
+  "City": {
+    "dataSource": "db",
+    "public": true
   }
 }

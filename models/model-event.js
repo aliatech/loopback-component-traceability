@@ -148,7 +148,12 @@ module.exports = function (ModelEvent) {
   ModelEvent.prototype.compileMessage = function () {
     if (!this.messageTemplate) return;
     const props = this.toJSON();
-    const message = sprintf(this.messageTemplate, props);
+    let message = '';
+    try {
+      message = sprintf(this.messageTemplate, props);
+    } catch (e) {
+      //
+    }
     this.setMessage(message);
   };
 

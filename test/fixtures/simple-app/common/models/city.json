@@ -1,0 +1,29 @@
+{
+  "name": "City",
+  "base": "PersistedModel",
+  "description": "Model for testing purpose",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Traceable": {
+      "config": "configTraceable"
+    }
+  },
+  "properties": {
+    "name": {
+      "description": "City name",
+      "type": "string",
+      "required": true
+    },
+    "population": {
+      "description": "Count citizens",
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "methods": {}
+}
